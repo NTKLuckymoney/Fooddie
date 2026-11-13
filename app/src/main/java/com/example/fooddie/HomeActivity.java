@@ -23,6 +23,13 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+        cardMonAn.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    HomeActivity.this,
+                    FoodActivity.class
+            );
+            startActivity(intent);
+        });
     }
 
 }

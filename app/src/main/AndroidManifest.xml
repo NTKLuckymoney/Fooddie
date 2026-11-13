@@ -23,6 +23,15 @@
         <activity
             android:name=".HomeActivity"
             android:exported="false"/>
+        <activity
+            android:name=".FoodActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ThemMonAnActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SuaMonAnActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

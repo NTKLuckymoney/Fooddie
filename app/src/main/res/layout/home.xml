@@ -41,8 +41,8 @@
                 android:id="@+id/btnDangXuat"
                 android:layout_width="54dp"
                 android:layout_height="54dp"
-                android:background="@null"
                 android:contentDescription="Đăng xuất"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"
                 android:src="@drawable/ic_icon_logout"
                 app:tint="#263746" />
@@ -212,11 +212,12 @@
                         android:id="@+id/imgThongKe"
                         android:layout_width="76dp"
                         android:layout_height="76dp"
-                        android:contentDescription="Ảnh thống kê"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_logo_doanhthu"
                         android:background="#FFF0E9"
-                        android:padding="16dp"/>
+                        android:contentDescription="Ảnh thống kê"
+                        android:padding="16dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_logo_doanhthu" />
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

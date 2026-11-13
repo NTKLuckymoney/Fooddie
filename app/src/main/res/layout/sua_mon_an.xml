@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F7F7F7">
+
+    <!-- Thanh tiêu đề -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#FF7854"
+        android:padding="12dp">
+
+        <ImageButton
+            android:id="@+id/btnQuayLai"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_icon_arrowleft"
+            app:tint="#263746"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Quay lại" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Chỉnh sửa món ăn"
+            android:textColor="#264763"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Ảnh món ăn -->
+            <ImageView
+                android:id="@+id/imgMonAnSua"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="#FFF0E9"
+                android:scaleType="centerCrop"
+                android:contentDescription="Ảnh món ăn" />
+
+            <Button
+                android:id="@+id/btnDoiAnh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Thay đổi ảnh"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#FF7854" />
+
+            <!-- Tên món ăn -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Tên món ăn"
+                android:textColor="#333333"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edtTenMonSua"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nhập tên món ăn"
+                android:inputType="textCapSentences"
+                android:singleLine="true" />
+
+            <!-- Danh mục -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Danh mục"
+                android:textColor="#333333"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spDanhMucSua"
+                android:layout_width="match_parent"
+                android:layout_height="52dp" />
+
+            <!-- Giá bán -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Giá bán (VNĐ)"
+                android:textColor="#333333"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edtGiaSua"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nhập giá bán"
+                android:inputType="numberDecimal"
+                android:singleLine="true" />
+
+            <!-- Trạng thái -->
+            <Switch
+                android:id="@+id/swTrangThaiSua"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Đang bán"
+                android:checked="true" />
+
+            <!-- Các nút thao tác -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="28dp">
+
+                <Button
+                    android:id="@+id/btnHuy"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_weight="1"
+                    android:text="Hủy"
+                    android:textColor="#333333"
+                    android:backgroundTint="#E8E8E8" />
+                <Button
+                    android:id="@+id/btnLuuThayDoi"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:text="Lưu thay đổi"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#FF7854" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
