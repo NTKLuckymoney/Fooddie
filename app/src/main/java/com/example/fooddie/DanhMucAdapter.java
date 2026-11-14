@@ -1,3 +1,4 @@
+
 package com.example.fooddie;
 
 import android.view.LayoutInflater;
@@ -5,22 +6,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
+
 public class DanhMucAdapter
         extends RecyclerView.Adapter<DanhMucAdapter.ViewHolder> {
 
     public interface OnDanhMucClickListener {
-        void onSua(int position);
-        void onXoa(int position);
+        void onXem(DanhMuc danhMuc);
+        void onSua(DanhMuc danhMuc);
+        void onXoa(DanhMuc danhMuc);
     }
 
-    private final ArrayList<String> danhSach;
+    private final ArrayList<DanhMuc> danhSach;
     private final OnDanhMucClickListener listener;
 
     public DanhMucAdapter(
-            ArrayList<String> danhSach,
+            ArrayList<DanhMuc> danhSach,
             OnDanhMucClickListener listener) {
         this.danhSach = danhSach;
         this.listener = listener;
@@ -29,45 +34,39 @@ public class DanhMucAdapter
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(
-            @NonNull ViewGroup parent, int viewType) {
+            @NonNull ViewGroup parent,
+            int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_danh_muc, parent, false);
+                .inflate(
+                        R.layout.item_danh_muc,
+                        parent,
+                        false
+                );
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(
-            @NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        DanhMuc danhMuc = danhSach.get(position);
 
-        holder.txtTen.setText(danhSach.get(position));
-        holder.txtSoLuong.setText("Dữ liệu mẫu");
+        holder.txtTen.setText(danhMuc.getTenDanhMuc());
 
-        holder.btnSua.setOnClickListener(v -> {
-            int pos = holder.getBindingAdapterPosition();
-            if (pos != RecyclerView.NO_POSITION) {
-                listener.onSua(pos);
-            }
-        });
+        holder.txtSoLuong.setText(danhMuc.getSoLuongMon() + " món ăn");
+        holder.itemView.setOnClickListener(v -> listener.onXem(danhMuc));
+        holder.btnSua.setOnClickListener(v -> listener.onSua(danhMuc));
+        holder.btnXoa.setOnClickListener(v -> listener.onXoa(danhMuc));
 
-        holder.btnXoa.setOnClickListener(v -> {
-            int pos = holder.getBindingAdapterPosition();
-            if (pos != RecyclerView.NO_POSITION) {
-                listener.onXoa(pos);
-            }
-        });
     }
-
     @Override
     public int getItemCount() {
         return danhSach.size();
     }
-    static class ViewHolder extends RecyclerView.ViewHolder {
 
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtTen, txtSoLuong;
         ImageButton btnSua, btnXoa;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 

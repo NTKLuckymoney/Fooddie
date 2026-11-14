@@ -143,7 +143,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         chenMon(db, "Phở bò", "Món nước", 45000, 1, "img_phobo");
         chenMon(db, "Cơm rang", "Món cơm", 40000, 1, "img_comrang");
         chenMon(db, "Bún chả", "Món nước", 35000, 0, "img_buncha");
-        chenMon(db,"Bún thang","Món Nước",50000,1,"img_bunthang");
+        chenMon(db,"Bún thang","Món nước",50000,1,"img_bunthang");
         chenMon(db,"Bún đậu nước mắm","Món mặn",30000,1,"img_bundau");
         chenMon(db,"Sưa chưa Việt Quất","Đồ uống",20000,1,"img_suachuavq");
         chenMon(db,"Thanh Long lướt sóng","Món chay",15000,1,"img_rauluoc");

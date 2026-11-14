@@ -36,6 +36,9 @@
             android:name=".DanhMucActivity"
             android:exported="false"/>
         <activity
+            android:name=".MonTheoDanhMucActivity"
+            android:exported="false"/>
+        <activity
             android:name=".HoaDonActivity"
             android:exported="false"/>
         <activity
