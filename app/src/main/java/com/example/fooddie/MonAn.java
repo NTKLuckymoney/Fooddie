@@ -5,8 +5,8 @@ public class MonAn {
     private String danhMuc;
     private double gia;
     private boolean dangBan;
-    private int hinhAnh;
-    public MonAn(int maMon, String tenMon, String danhMuc, double gia, boolean dangBan, int hinhAnh) {
+    private String hinhAnh;
+    public MonAn(int maMon, String tenMon, String danhMuc, double gia, boolean dangBan, String hinhAnh) {
         this.maMon = maMon;
         this.tenMon = tenMon;
         this.danhMuc = danhMuc;
@@ -26,10 +26,8 @@ public class MonAn {
     public double getGia() {
         return gia;
     }
-    public boolean isDangBan() {
-        return dangBan;
-    }
-    public int getHinhAnh() {
+    public boolean isDangBan() {return dangBan;}
+    public String getHinhAnh() {
         return hinhAnh;
     }
 }

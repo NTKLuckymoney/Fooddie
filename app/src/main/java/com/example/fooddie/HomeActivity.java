@@ -19,14 +19,8 @@ public class HomeActivity extends AppCompatActivity {
         cardHoaDon=findViewById(R.id.cardHoaDon);
         cardThongKe=findViewById(R.id.cardThongKe);
         btnDangXuat.setOnClickListener(v -> {
-            getSharedPreferences("FooddieSession", MODE_PRIVATE)
-                    .edit()
-                    .remove("daDangNhap")
-                    .apply();
-            Intent intent = new Intent(
-                    HomeActivity.this,
-                    LoginActivity.class
-            );
+            getSharedPreferences("FooddieSession", MODE_PRIVATE).edit().remove("daDangNhap").apply();
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
             intent.setFlags(
                     Intent.FLAG_ACTIVITY_NEW_TASK |
                             Intent.FLAG_ACTIVITY_CLEAR_TASK
