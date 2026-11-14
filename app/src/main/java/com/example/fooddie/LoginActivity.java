@@ -31,13 +31,10 @@ public class LoginActivity extends AppCompatActivity {
         ImageView imgLogo = findViewById(R.id.imgLogo);
         imgLogo.setImageResource(R.drawable.ic_logo_chef);
         Button btnDangNhap = findViewById(R.id.btnDangNhap);
-
         EditText edtTaiKhoan = findViewById(R.id.edtTaiKhoan);
         EditText edtMatKhau = findViewById(R.id.edtMatKhau);
         CheckBox cbCookie = findViewById(R.id.cbCookie);
-
         DatabaseHelper dbHelper = new DatabaseHelper(this);
-
         SharedPreferences preferences = getSharedPreferences(
                 "FooddieSession", MODE_PRIVATE);
 
@@ -49,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
             finish();
             return;
         }
-
         btnDangNhap.setOnClickListener(v -> {
             String taiKhoan = edtTaiKhoan.getText()
                     .toString().trim();
@@ -66,18 +62,13 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
             if (dbHelper.kiemTraDangNhap(taiKhoan, matKhau)) {
-
                 preferences.edit()
-                        .putBoolean(
-                                "daDangNhap",
-                                cbCookie.isChecked())
+                        .putBoolean("daDangNhap",cbCookie.isChecked())
                         .apply();
                 startActivity(new Intent(
                         LoginActivity.this,
                         HomeActivity.class));
-
                 finish();
-
             } else {
                 Toast.makeText(this,
                         "Sai tài khoản hoặc mật khẩu",

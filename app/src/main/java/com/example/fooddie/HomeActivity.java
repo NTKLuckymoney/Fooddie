@@ -40,6 +40,21 @@ public class HomeActivity extends AppCompatActivity {
             );
             startActivity(intent);
         });
+        cardDanhMuc.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    HomeActivity.this,
+                    DanhMucActivity.class
+            );
+            startActivity(intent);
+        });
+        cardHoaDon.setOnClickListener(v ->{
+            Intent intent = new Intent(HomeActivity.this, HoaDonActivity.class);
+            startActivity(intent);
+        });
+        cardThongKe.setOnClickListener(v ->{
+            Intent intent = new Intent(HomeActivity.this, ThongKeActivity.class);
+            startActivity(intent);
+        });
     }
 
 }

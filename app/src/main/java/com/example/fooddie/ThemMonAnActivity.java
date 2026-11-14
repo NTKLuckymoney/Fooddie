@@ -52,9 +52,7 @@ public class ThemMonAnActivity extends AppCompatActivity {
         spinnerAdapter.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item
         );
-
         spDanhMuc.setAdapter(spinnerAdapter);
-
         btnLuuMon.setOnClickListener(v -> luuMonAn());
 
         findViewById(R.id.btnQuayLai)

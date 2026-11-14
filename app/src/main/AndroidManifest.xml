@@ -32,6 +32,24 @@
         <activity
             android:name=".SuaMonAnActivity"
             android:exported="false"/>
+        <activity
+            android:name=".DanhMucActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".HoaDonActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ThemHoaDonActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".SuaHoaDonActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ChiTietHoaDonActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ThongKeActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

@@ -12,7 +12,7 @@ import javax.crypto.spec.PBEKeySpec;
 import java.util.ArrayList;
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "Fooddie.db";
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 3;
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -35,32 +35,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "CREATE TABLE IF NOT EXISTS TaiKhoan (" +
                         "MaTaiKhoan INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "TenDangNhap TEXT NOT NULL UNIQUE, " +
-                        "MatKhauHash TEXT NOT NULL, " +
-                        "Salt TEXT NOT NULL, " +
-                        "VaiTro TEXT NOT NULL)"
+                        "MatKhau TEXT NOT NULL, " +
+                        "VaiTro TEXT NOT NULL DEFAULT 'ADMIN')"
         );
-
-        // Tạo tài khoản demo nếu chưa tồn tại
-        try (Cursor cursor = db.rawQuery(
-                "SELECT MaTaiKhoan FROM TaiKhoan " +
-                        "WHERE TenDangNhap = ?",
-                new String[]{"admin"})) {
-
-            if (cursor.moveToFirst()) {
-                return;
-            }
-        }
-
-        String salt = taoSalt();
-
         ContentValues values = new ContentValues();
         values.put("TenDangNhap", "admin");
-        values.put("MatKhauHash",
-                bamMatKhau("adm@123", salt));
-        values.put("Salt", salt);
+        values.put("MatKhau", "123456");
         values.put("VaiTro", "ADMIN");
-
-        db.insertOrThrow("TaiKhoan", null, values);
+        db.insertWithOnConflict(
+                "TaiKhoan",
+                null,
+                values,
+                SQLiteDatabase.CONFLICT_IGNORE
+        );
     }
     @Override
     public void onUpgrade(SQLiteDatabase db,
@@ -68,82 +55,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (oldVersion < 2) {
             taoBangTaiKhoan(db);
         }
-    }
-    private String taoSalt() {
-        byte[] bytes = new byte[16];
-        new SecureRandom().nextBytes(bytes);
-
-        return Base64.encodeToString(
-                bytes, Base64.NO_WRAP);
-    }
-    private String bamMatKhau(String matKhau, String salt) {
-        PBEKeySpec spec = null;
-
-        try {
-            spec = new PBEKeySpec(
-                    matKhau.toCharArray(),
-                    Base64.decode(salt, Base64.NO_WRAP),
-                    120000,
-                    256
-            );
-            byte[] hash = SecretKeyFactory
-                    .getInstance("PBKDF2WithHmacSHA256")
-                    .generateSecret(spec)
-                    .getEncoded();
-
-            return Base64.encodeToString(
-                    hash, Base64.NO_WRAP);
-
-        } catch (Exception e) {
-            throw new IllegalStateException(
-                    "Lỗi xử lý mật khẩu", e);
-        } finally {
-            if (spec != null) {
-                spec.clearPassword();
-            }
+        if (oldVersion < 3) {
+            db.execSQL("DROP TABLE IF EXISTS TaiKhoan");
+            taoBangTaiKhoan(db);
         }
     }
-
     public boolean kiemTraDangNhap(
             String taiKhoan, String matKhau) {
-
         SQLiteDatabase db = getReadableDatabase();
+        try (Cursor cursor = db.rawQuery(
+                "SELECT MaTaiKhoan FROM TaiKhoan " +
+                        "WHERE TenDangNhap = ? AND MatKhau = ?",
+                new String[]{taiKhoan, matKhau})) {
 
-        try (Cursor cursor = db.query(
-                "TaiKhoan",
-                new String[]{"MatKhauHash", "Salt"},
-                "TenDangNhap = ?",
-                new String[]{taiKhoan},
-                null, null, null)) {
-
-            if (!cursor.moveToFirst()) {
-                return false;
-            }
-
-            String hashDaLuu = cursor.getString(0);
-            String salt = cursor.getString(1);
-            String hashNhap = bamMatKhau(matKhau, salt);
-
-            return MessageDigest.isEqual(
-                    Base64.decode(hashDaLuu, Base64.NO_WRAP),
-                    Base64.decode(hashNhap, Base64.NO_WRAP)
-            );
+            return cursor.moveToFirst();
         }
     }
-
     public long themMonAn(String tenMon, String danhMuc,
                           double gia, boolean dangBan,
                           String hinhAnh) {
-
         SQLiteDatabase db = getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put("TenMon", tenMon);
         values.put("DanhMuc", danhMuc);
         values.put("Gia", gia);
         values.put("TrangThai", dangBan ? 1 : 0);
         values.put("HinhAnh", hinhAnh);
-
         return db.insert("MonAn", null, values);
     }
     public ArrayList<MonAn> layDanhSachMonAn() {
@@ -156,13 +93,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             while (cursor.moveToNext()) {
                 int ma = cursor.getInt(
                         cursor.getColumnIndexOrThrow("MaMon"));
-
                 String ten = cursor.getString(
                         cursor.getColumnIndexOrThrow("TenMon"));
-
                 String danhMuc = cursor.getString(
                         cursor.getColumnIndexOrThrow("DanhMuc"));
-
                 double gia = cursor.getDouble(
                         cursor.getColumnIndexOrThrow("Gia"));
 
@@ -178,7 +112,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                  */
             }
         }
-
         return danhSach;
     }
 }

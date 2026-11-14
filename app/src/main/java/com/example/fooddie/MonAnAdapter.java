@@ -12,14 +12,12 @@ import android.widget.TextView;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
 public class MonAnAdapter
         extends RecyclerView.Adapter<MonAnAdapter.MonAnViewHolder> {
-
     private final List<MonAn> danhSach;
 
     public MonAnAdapter(List<MonAn> danhSach) {
@@ -31,31 +29,23 @@ public class MonAnAdapter
     @Override
     public MonAnViewHolder onCreateViewHolder(
             @NonNull ViewGroup parent, int viewType) {
-
         Context context = parent.getContext();
-
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.item_mon_an, parent, false);
-
         return new MonAnViewHolder(view);
     }
 
-    // 2. Đưa dữ liệu món ăn vào các View
     @Override
     public void onBindViewHolder(
             @NonNull MonAnViewHolder holder, int position) {
-
         MonAn mon = danhSach.get(position);
-
         holder.txtTenMon.setText(mon.getTenMon());
         holder.txtDanhMuc.setText(mon.getDanhMuc());
-
         NumberFormat format = NumberFormat.getNumberInstance(
                 new Locale("vi", "VN"));
 
         holder.txtGia.setText(
                 format.format(mon.getGia()) + "đ");
-
         if (mon.isDangBan()) {
             holder.txtTrangThai.setText("Đang bán");
             holder.txtTrangThai.setTextColor(

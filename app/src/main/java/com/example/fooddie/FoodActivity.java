@@ -20,25 +20,18 @@ public class FoodActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.food);
-
-
         rvMonAn = findViewById(R.id.rvMonAn);
-
-
         danhSachMonAn = new ArrayList<>();
 
         danhSachMonAn.add(new MonAn(
                 1, "Phở bò", "Món nước", 45000, true,R.drawable.img_phobo
         ));
-
         danhSachMonAn.add(new MonAn(
                 2, "Cơm rang", "Món cơm", 40000, true, R.drawable.img_comrang
                 ));
-
         danhSachMonAn.add(new MonAn(
                 3, "Bún chả", "Món nước", 35000, false, R.drawable.img_buncha));
 
-        // 3. Thiết lập danh sách theo chiều dọc
         rvMonAn.setLayoutManager(
                 new LinearLayoutManager(this));
 
