@@ -9,10 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -194,10 +194,8 @@ public class SuaHoaDonActivity extends AppCompatActivity {
         hienThiDanhSachMon();
     }
 
-    // 5. Hiển thị và gắn sự kiện cho TẤT CẢ món
     private void hienThiDanhSachMon() {
         layoutDanhSachMon.removeAllViews();
-
         for (MonTrongHoaDon mon : danhSachMon) {
 
             View item = LayoutInflater.from(this)
@@ -218,10 +216,8 @@ public class SuaHoaDonActivity extends AppCompatActivity {
 
             TextView txtThanhTien =
                     item.findViewById(R.id.txtThanhTien);
-
-            Button btnTang = item.findViewById(R.id.btnTang);
-            Button btnGiam = item.findViewById(R.id.btnGiam);
-
+            ImageButton btnTang = item.findViewById(R.id.btnTang);
+            ImageButton btnGiam = item.findViewById(R.id.btnGiam);
             txtTenMon.setText(mon.getTenMon());
 
             txtDonGia.setText(
